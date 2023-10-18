@@ -25,7 +25,6 @@ $ wget https://raw.githubusercontent.com/duynamrcv/ardrone_simulator/master/roto
 $ wstool merge rotors_hil.rosinstall
 $ wstool update
 $ rm -r rotors_hil.rosinstall
-$ git clone https://github.com/duynamrcv/ardrone_simulator.git
 ```
 
 3. Build your workspace with `python_catkin_tools` (therefore you need `python_catkin_tools`)
