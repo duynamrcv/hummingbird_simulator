@@ -21,7 +21,8 @@
 
 <robot name="$(arg mav_name)" xmlns:xacro="http://ros.org/wiki/xacro">
   <!-- Instantiate the mav with a generic pose sensor. -->
-  <xacro:include filename="$(find rotors_description)/urdf/mav_generic_odometry_sensor.gazebo" />
+  <!-- <xacro:include filename="$(find rotors_description)/urdf/mav_generic_odometry_sensor.gazebo" /> -->
+  <xacro:include filename="$(find rotors_description)/urdf/mav_with_perception.gazebo" />
 
   <!-- Add a wind gust starting at 40s and lasting for 2s. -->
   <xacro:wind_plugin_macro
