@@ -1,6 +1,6 @@
-# ARDrone Gazebo Simulator
-![Alt text](ardrone.png)
-ARDrone is a MAV gazebo simulator modified and forked from [ethz-asl/rotors_simulator](https://github.com/ethz-asl/rotors_simulator/).
+# Hummingbird Gazebo Simulator
+![Alt text](image.png)
+Hummingbird is a MAV gazebo simulator modified and forked from [ethz-asl/rotors_simulator](https://github.com/ethz-asl/rotors_simulator/).
 
 There are simulated sensors coming with the simulator such as an IMU, a generic odometry sensor, and the [VI-Sensor](http://wiki.ros.org/vi_sensor), which can be mounted on the multirotor. This package also contains some example controllers, basic worlds, and example launch files.
 
@@ -21,7 +21,7 @@ $ mkdir -p ~/catkin_ws/src
 $ cd ~/catkin_ws/src
 $ catkin_init_workspace  # initialize your catkin workspace
 $ wstool init
-$ wget https://raw.githubusercontent.com/duynamrcv/ardrone_simulator/master/rotors_hil.rosinstall
+$ wget https://raw.githubusercontent.com/duynamrcv/hummingbird_simulator/master/rotors_hil.rosinstall
 $ wstool merge rotors_hil.rosinstall
 $ wstool update
 $ rm -r rotors_hil.rosinstall
@@ -44,7 +44,7 @@ $ rm -r rotors_hil.rosinstall
 
 ## Basic Usage
 
-Launch the simulator with a quadrotor helicopter model named ARDrone in a basic world.
+Launch the simulator with a quadrotor helicopter model named Hummingbird in a basic world.
 
 ```
 $ roslaunch rotors_gazebo mav_hovering_example.launch
@@ -60,19 +60,19 @@ The simulator starts by default in paused mode. To start it you can either
    $ rosservice call gazebo/unpause_physics
    ```
 
-There are some basic launch files where you can load the different multicopters with additional sensors. They can all be found in `~/catkin_ws/src/ardrone_simulator/rotors_gazebo/launch`.
+There are some basic launch files where you can load the different multicopters with additional sensors. They can all be found in `~/catkin_ws/src/ummingbird_simulator/rotors_gazebo/launch`.
 
-The `world_name` argument looks for a .world file with a corresponding name in `~/catkin_ws/src/ardrone_simulator/rotors_gazebo/worlds`. By default, all launch files, with the exception of those that have the world name explicitly included in the file name, use the empty world described in `basic.world`.
+The `world_name` argument looks for a .world file with a corresponding name in `~/catkin_ws/src/hummingbird_simulator/rotors_gazebo/worlds`. By default, all launch files, with the exception of those that have the world name explicitly included in the file name, use the empty world described in `basic.world`.
 
 #### Send direct motor commands
 
 We will for now just send some constant motor velocities to the multicopter.
 
 ```
-$ rostopic pub /ardrone/command/motor_speed mav_msgs/Actuators '{angular_velocities: [100, 100, 100, 100]}'
+$ rostopic pub /hummingbird/command/motor_speed mav_msgs/Actuators '{angular_velocities: [100, 100, 100, 100]}'
 ```
 
-> **Note** The size of the `motor_speed` array should be equal to the number of motors you have in your model of choice (e.g. 4 in the ARDrone model).
+> **Note** The size of the `motor_speed` array should be equal to the number of motors you have in your model of choice (e.g. 4 in the Hummingbird model).
 
 ## Original version of Rotors Simulator
 Learn more and discover original version in RotorS' wiki for more instructions and examples (https://github.com/ethz-asl/rotors_simulator/wiki). Please cite the original version:

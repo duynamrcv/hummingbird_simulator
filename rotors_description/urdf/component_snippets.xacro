@@ -736,13 +736,14 @@
             <resolution>0.01</resolution>
           </range>
           <noise>
-            <type>Gaussian</type>
+            <type>gaussian</type>
             <mean>0.0</mean>
             <stddev>0.01</stddev>
           </noise>
         </ray>
         <plugin name="gazebo_ros_lidar_controller" filename="libgazebo_ros_laser.so">
-          <topicName>/scan</topicName>
+          <robotNamespace>${namespace}</robotNamespace>
+          <topicName>scan</topicName>
           <frameName>${namespace}/laser_lidar_link</frameName>
           <!-- <interface:laser name="gazebo_ros_${laser_suffix}_iface" /> -->
         </plugin>

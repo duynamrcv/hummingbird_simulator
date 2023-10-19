@@ -33,8 +33,6 @@
     wind_gust_duration="2"
     wind_gust_start="40"
     wind_gust_force_mean="5"
-    wind_speed_mean="0"
-    use_custom_static_wind_field="false"
-    custom_wind_field_path="false">
+    wind_speed_mean="0">
   </xacro:wind_plugin_macro>
 </robot>
