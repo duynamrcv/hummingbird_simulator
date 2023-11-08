@@ -731,7 +731,7 @@
             </horizontal>
             <vertical>
               <samples>16</samples>
-              <resolution>2</resolution>
+              <resolution>1</resolution>
               <min_angle>-${15.0*pi/180.0}</min_angle>
               <max_angle> ${15.0*pi/180.0}</max_angle>
             </vertical>
