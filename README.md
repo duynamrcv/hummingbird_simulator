@@ -14,6 +14,7 @@ $ sudo apt install python3-catkin-tools
 $ sudo apt install libgoogle-glog-dev
 $ sudo apt install ros-noetic-octomap-ros ros-noetic-octomap-msgs
 $ sudo apt install ros-noetic-mavros
+$ sudo apt install ros-noetic-velodyne-gazebo-plugins
 ```
 2. If you don't have ROS workspace yet you can do so by
 
