@@ -20,6 +20,7 @@
 -->
 
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:property name="deg_to_rad" value="0.01745329251994329577" />
 
   <!-- Macro to add logging to a bag file. -->
   <xacro:macro name="bag_plugin_macro"
@@ -232,10 +233,10 @@
         <plugin name="${namespace}_stereo_camera_controller" filename="libgazebo_ros_multicamera.so">
           <alwaysOn>true</alwaysOn>
           <updateRate>0.0</updateRate>
-          <cameraName>${camera_name}</cameraName>
+          <cameraName>camera_</cameraName>
           <imageTopicName>image_raw</imageTopicName>
           <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-          <frameName>${camera_name}/camera_left_link</frameName>
+          <frameName>camera_/camera_left_link</frameName>
           <hackBaseline>${baseline_y}</hackBaseline>
           <distortionK1>0.0</distortionK1>
           <distortionK2>0.0</distortionK2>
@@ -691,6 +692,78 @@
     </gazebo>
   </xacro:macro>
 
+  <!-- Realsense D435 Macro -->
+  <xacro:macro name="d435_xacro" params="namespace parent_link *origin">
+    <link name="${namespace}/d435_link">
+      <inertial>
+        <mass value="0.01" />
+        <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}" />
+        <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}" />
+        <geometry>
+          <mesh filename="package://rotors_description/meshes/d435_simple.dae" scale="1 1 1"/>
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}" />
+        <geometry>
+          <mesh filename="package://rotors_description/meshes/d435_simple.dae" scale="1 1 1" />
+        </geometry>
+      </collision>
+    </link>
+    <joint name="d435_joint" type="fixed">
+      <xacro:insert_block name="origin" />
+      <parent link="${parent_link}"/>
+      <child link="${namespace}/d435_link"/>
+    </joint>
+    <gazebo reference="${namespace}/d435_link">
+      <material>Gazebo/Black</material>
+      <sensor type="depth" name="openni_camera_camera">
+        <always_on>1</always_on>
+        <visualize>true</visualize>
+        <camera>
+          <horizontal_fov>1.047</horizontal_fov>
+          <image>
+            <width>1280</width>
+            <height>960</height>
+            <format>R8G8B8</format>
+          </image>
+          <depth_camera>
+
+          </depth_camera>
+          <clip>
+            <near>0.1</near>
+            <far>100</far>
+          </clip>
+        </camera>
+        <plugin name="gazebo_ros_d435_controller" filename="libgazebo_ros_openni_kinect.so">
+          <alwaysOn>true</alwaysOn>
+          <updateRate>10.0</updateRate>
+          <cameraName>camera</cameraName>
+          <frameName>camera_depth_frame</frameName>
+          <imageTopicName>rgb/image_raw</imageTopicName>
+          <depthImageTopicName>depth/image_raw</depthImageTopicName>
+          <pointCloudTopicName>depth/points</pointCloudTopicName>
+          <cameraInfoTopicName>rgb/camera_info</cameraInfoTopicName>
+          <depthImageCameraInfoTopicName>depth/camera_info</depthImageCameraInfoTopicName>
+          <pointCloudCutoff>0.4</pointCloudCutoff>
+          <hackBaseline>0.07</hackBaseline>
+          <distortionK1>0.0</distortionK1>
+          <distortionK2>0.0</distortionK2>
+          <distortionK3>0.0</distortionK3>
+          <distortionT1>0.0</distortionT1>
+          <distortionT2>0.0</distortionT2>
+          <CxPrime>0.0</CxPrime>
+          <Cx>0.0</Cx>
+          <Cy>0.0</Cy>
+          <focalLength>0.0</focalLength>
+        </plugin>
+      </sensor>
+    </gazebo>
+  </xacro:macro>
+
   <!-- Lidar Macro-->
   <xacro:macro name="lidar_xacro" params="namespace parent_link *origin">
     <link name="${namespace}/laser_lidar_link">
@@ -706,9 +779,9 @@
       </visual>
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
-          <geometry>
-            <box size="0.058 0.058 0.087" />
-          </geometry>
+        <geometry>
+          <box size="0.058 0.058 0.087" />
+        </geometry>
       </collision>
     </link>
     <joint name="laser_lidar_joint" type="fixed">
